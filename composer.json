@@ -1,0 +1,9 @@
+{
+    "name": "backend/api",
+    "description": "Aula web service",
+    "require": {
+        "slim/slim": "^3"
+    }
+
+
+}
