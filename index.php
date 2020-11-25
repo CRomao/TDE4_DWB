@@ -15,15 +15,17 @@ $app = new App(new Container([
 //rota /webservice/validar/numericos
 $app->post("/webservice/validar/numericos", function($req, $res, $args){
     
-    $numeros = array();
+    $valores = json_decode($req->getBody()->getContents(), true);
+    $resultado = array();
 
-    foreach ($req->getParsedBody() as $key => $value) {
-        if(is_numeric($value) && !is_string($value)){
-            array_push($numeros, $value);
+    foreach ($valores as $valor) {
+        if(is_numeric($valor) && !is_string($valor)){
+            array_push($resultado, $valor);
         }
     }    
-        var_dump($numeros);
+        var_dump($resultado);
 });
+
 
 
 //rota /webservice/validar/maior
@@ -38,16 +40,18 @@ $app->post("/webservice/validar/numericos", function($req, $res, $args){
 "v6": 2
 }
 */ 
-
 $app->post("/webservice/validar/maior", function($req, $res, $args){
     
-    $numeros = array();
+    $valores = json_decode($req->getBody()->getContents(), true);
+    $resultado = array();
 
-    foreach ($req->getParsedBody() as $key => $value) {      
-            array_push($numeros, $value);
+    foreach ($valores as $valor) {      
+            array_push($resultado, $valor);
     }    
-        echo "maior: " . max($numeros);
+        echo "maior: " . max($resultado);
 });
+
+
 
 //rota /webservice/validar/par-ou-impar/numero
 $app->get("/webservice/validar/par-ou-impar/{numero}", function($req, $res, $args){
@@ -59,6 +63,8 @@ $app->get("/webservice/validar/par-ou-impar/{numero}", function($req, $res, $arg
         "resultado" => $numero
     ]);
 });
+
+
 
 //rota /webservice/testar/tipo-variavel
 
@@ -74,12 +80,13 @@ $app->get("/webservice/validar/par-ou-impar/{numero}", function($req, $res, $arg
 */
 $app->post("/webservice/testar/tipo-variavel", function($req, $res, $args){
     
-    $numeros = array();
+    $valores = json_decode($req->getBody()->getContents(), true);
+    $resultado = array();
 
-    foreach ($req->getParsedBody() as $key => $value) {
-            array_push($numeros, gettype($value));
+    foreach ($valores as $valor) {
+            array_push($resultado, gettype($valor));
     }    
-        var_dump($numeros);
+        var_dump($resultado);
 });
 
 
